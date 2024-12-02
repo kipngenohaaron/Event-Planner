@@ -41,11 +41,11 @@
 
 #     return render_template('create_event.html')
 from flask import render_template, request, redirect, url_for
-from . import db
 from .models import Event
 
 # Define the routes inside a function or in app context
 def register_routes(app):
+    from . import db  # Move this import here to avoid circular import
 
     @app.route('/')
     def index():
