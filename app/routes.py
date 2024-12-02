@@ -1,8 +1,10 @@
-from flask import render_template, request, redirect, url_for, flash
-from . import db
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from .models import Event
+from . import db
 
-@app.route('/create', methods=['GET', 'POST'])
+bp = Blueprint('routes', __name__)
+
+@bp.route('/create', methods=['GET', 'POST'])
 def create_event():
     if request.method == 'POST':
         title = request.form.get('title')
@@ -14,6 +16,6 @@ def create_event():
         db.session.add(new_event)
         db.session.commit()
         flash('Event created successfully!', 'success')
-        return redirect(url_for('create_event'))
+        return redirect(url_for('routes.create_event'))
 
     return render_template('create_event.html')
