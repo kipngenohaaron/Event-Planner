@@ -21,6 +21,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from .config import Config
+from .routes import register_routes  # Import the register_routes function
 
 # Initialize the database
 db = SQLAlchemy()
@@ -34,7 +35,6 @@ def create_app():
     db.init_app(app)
 
     # Register the routes
-    with app.app_context():
-        from . import routes
+    register_routes(app)  # Call the function to register routes
 
     return app
