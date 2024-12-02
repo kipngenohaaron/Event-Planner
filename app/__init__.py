@@ -22,7 +22,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from .config import Config
 
-# Initialize SQLAlchemy
+# Initialize the database
 db = SQLAlchemy()
 
 def create_app():
@@ -33,10 +33,8 @@ def create_app():
     # Initialize the database with the app
     db.init_app(app)
 
-    # Register routes (controllers)
+    # Register the routes
     with app.app_context():
-        # Import routes to initialize them
         from . import routes
-        from .models import Event
 
     return app
