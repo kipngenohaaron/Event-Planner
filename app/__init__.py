@@ -1,20 +1,42 @@
+# from flask import Flask
+# from flask_sqlalchemy import SQLAlchemy
+
+# db = SQLAlchemy()
+
+# def create_app():
+#     app = Flask(__name__)
+#     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///events.db'
+#     app.config['SECRET_KEY'] = 'your_secret_key'
+#     db.init_app(app)
+
+#     with app.app_context():
+#         from . import models
+#         db.create_all()
+
+#         # Import and register routes blueprint
+#         from .routes import bp as routes_bp
+#         app.register_blueprint(routes_bp)
+
+#     return app
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from .config import Config
 
+# Initialize SQLAlchemy
 db = SQLAlchemy()
 
 def create_app():
-    app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///events.db'
-    app.config['SECRET_KEY'] = 'your_secret_key'
+    # Create and configure the Flask app
+    app = Flask(__name__, instance_relative_config=True)
+    app.config.from_object(Config)
+
+    # Initialize the database with the app
     db.init_app(app)
 
+    # Register routes (controllers)
     with app.app_context():
-        from . import models
-        db.create_all()
-
-        # Import and register routes blueprint
-        from .routes import bp as routes_bp
-        app.register_blueprint(routes_bp)
+        # Import routes to initialize them
+        from . import routes
+        from .models import Event
 
     return app
