@@ -1,7 +1,3 @@
-Here’s the updated README with the author section moved to the top and the correct GitHub repository link added:
-
----
-
 # Event Planner - Flask Application
 
 **Author**  
@@ -204,6 +200,3 @@ for event in events:
 
 This project is open-source and available under the [MIT License](LICENSE).
 
----
-
-Let me know if you need further adjustments!
