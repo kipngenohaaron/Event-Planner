@@ -41,7 +41,7 @@
 
 #     return render_template('create_event.html')
 from flask import render_template, request, redirect, url_for
-from . import app, db
+from . import db
 from .models import Event
 
 @app.route('/')
